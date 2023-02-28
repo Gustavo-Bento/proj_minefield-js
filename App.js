@@ -1,38 +1,31 @@
-import * as React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
-import Constants from 'expo-constants';
+import React, { Component } from 'react';
+import { Platform, StyleSheet, Text, View } from 'react-native';
+import params from './src/Params';
 
-// You can import from local files
-import AssetExample from './components/AssetExample';
-
-// or any pure javascript modules available in npm
-import { Card } from 'react-native-paper';
-
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.paragraph}>
-        Change code in the editor and watch it change on your phone! Save to get a shareable url.
-      </Text>
-      <Card>
-        <AssetExample />
-      </Card>
-    </View>
-  );
+export default class App extends Component {
+  render() {
+    return (
+      <View style={style.container}>
+        <Text style={style.welcome}>Iniciando o Mines!!!</Text>
+        <Text style={style.welcome}>
+          Tamanho da grade:
+          {params.getRowsAmount()}x{params.getColumnsAmount()}
+        </Text>
+      </View>
+    );
+  }
 }
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    paddingTop: Constants.statusBarHeight,
-    backgroundColor: '#ecf0f1',
-    padding: 8,
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
   },
-  paragraph: {
-    margin: 24,
-    fontSize: 18,
-    fontWeight: 'bold',
+  welcome: {
+    fontSize: 20,
     textAlign: 'center',
-  },
+    margin: 10,
+  }
 });
