@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import params from './src/Params';
 import Field from './src/components/Field'
+import Flag from './src/components/Flag'
 
 export default class App extends Component {
   render() {
@@ -34,6 +35,7 @@ const style = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
+    justifyContent: 'space-around',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
