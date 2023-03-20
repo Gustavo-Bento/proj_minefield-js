@@ -1,47 +1,48 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import params from './src/Params';
-import Field from './src/components/Field'
-import Flag from './src/components/Flag'
+import Params from './src/Params';
+import MineField from './src/components/MineField'
+import {
+  createMinedBoard
+} from './src/Functions'
 
 export default class App extends Component {
+
+  constructor(props) {
+    super(props)
+    this.state = this.createState()
+  }
+
+  minesAmount =() =>  {
+    const cols = Params.getColumnsAmount()
+    const rows =  Params.getRowsAmount()
+    return Math.ceil(cols * rows * Params.difficultLevel)
+  }
+  createState = () => {
+    const cols = Params.getColumnsAmount()
+    const rows = Params.getRowsAmount()
+    return {
+      board: createMinedBoard(rows,cols, this.minesAmount()),
+      
+    }
+  }
+
   render() {
     return (
       <View style={style.container}>
         <Text style={style.welcome}>Iniciando o Mines!!!</Text>
         <Text style={style.welcome}>
           Tamanho da grade:
-          {params.getRowsAmount()}x{params.getColumnsAmount()}
+          {Params.getRowsAmount()}x{Params.getColumnsAmount()}
         </Text>
-        <Field />
-        <Field opened />
-        <Field opened nearMines={1} />
-        <Field opened nearMines={2} />
-        <Field opened nearMines={3} />
-        <Field opened nearMines={4} />
-        <Field opened nearMines={5} />
-        <Field opened nearMines={6} />
-        <Field mined />
-        <Field mined opened />
-        <Field mined opened exploded />
-        <Field flagged />
-        <Field flagged opened />
+        <View style={style.board}>
+          <MineField board={this.state.board} />
+        </View>
       </View>
     );
   }
 }
 
 const style = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  }
+  container: {}
 });
